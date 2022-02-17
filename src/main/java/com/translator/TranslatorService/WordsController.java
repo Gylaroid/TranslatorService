@@ -6,29 +6,26 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class WordsController {
-    private GlossaryService glossary;
+    private final GlossaryService glossary;
 
-    WordsController(){
-        this.glossary = new GlossaryService();
+    WordsController(GlossaryService glossary){
+        this.glossary = glossary;
     }
 
     @RequestMapping(value = "/word", method = RequestMethod.POST)
     public ResponseEntity addWord(@RequestBody WordPair wordPair){
-        this.glossary.add(wordPair);
-        System.out.println("En: " + wordPair.getEn() + " Ru: " + wordPair.getRu());
+        glossary.addWordPair(wordPair.getEn(), wordPair.getRu());
         return new ResponseEntity(HttpStatus.CREATED);
-
     }
 
 
     @RequestMapping(value = "/word/{word}", method = RequestMethod.GET)
-    public ResponseEntity translateWord(@PathVariable("word") String word){
-        for (int i = 0; i < glossary.size(); i++){
-            WordPair pair = (WordPair) glossary.get(i);
-            if (word.equals(pair.getEn())){
-                return new ResponseEntity(pair.getRu(), HttpStatus.OK);
-            }
+    public ResponseEntity translateWord(@PathVariable("word") String enWord){
+        if (glossary.getRuWord(enWord) != null){
+            return new ResponseEntity(glossary.getRuWord(enWord), HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        else {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
     }
 }
