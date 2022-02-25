@@ -16,9 +16,9 @@ public class RussianWord {
     private long id;
 
     @Column(name = "ru_word")
-    private String ruWord;
+    private String ruWordBody;
 
-    @OneToOne(mappedBy = "ru_words")
+    @OneToOne(mappedBy = "ruWord")
     private EnglishWord enWord;
 
     public RussianWord() {
@@ -32,12 +32,12 @@ public class RussianWord {
         this.id = id;
     }
 
-    public String getRuWord() {
-        return ruWord;
+    public String getRuWordBody() {
+        return ruWordBody;
     }
 
-    public void setRuWord(String ruWord) {
-        this.ruWord = ruWord;
+    public void setRuWordBody(String ruWord) {
+        this.ruWordBody = ruWord;
     }
 
     public EnglishWord getEnWord() {
@@ -52,7 +52,7 @@ public class RussianWord {
     public String toString() {
         return "RussianWord{" +
                 "id=" + id +
-                ", ruWord='" + ruWord + '\'' +
+                ", ruWord='" + ruWordBody + '\'' +
                 ", enWord=" + enWord +
                 '}';
     }

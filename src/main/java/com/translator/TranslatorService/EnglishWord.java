@@ -18,7 +18,7 @@ public class EnglishWord {
     private long id;
 
     @Column(name = "en_word")
-    private String enWord;
+    private String enWordBody;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ru_word_id", referencedColumnName = "id")
@@ -35,12 +35,12 @@ public class EnglishWord {
         this.id = id;
     }
 
-    public String getEnWord() {
-        return enWord;
+    public String getEnWordBody() {
+        return enWordBody;
     }
 
-    public void setEnWord(String word) {
-        this.enWord = word;
+    public void setEnWordBody(String word) {
+        this.enWordBody = word;
     }
 
     public RussianWord getRuWord() {
@@ -55,7 +55,7 @@ public class EnglishWord {
     public String toString() {
         return "EnglishWord{" +
                 "id=" + id +
-                ", enWord='" + enWord + '\'' +
+                ", enWord='" + enWordBody + '\'' +
                 ", ruWord=" + ruWord +
                 '}';
     }
