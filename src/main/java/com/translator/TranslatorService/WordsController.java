@@ -20,10 +20,14 @@ public class WordsController {
     }
 
     @RequestMapping(value = "/word", method = RequestMethod.POST)
-    public ResponseEntity addWordPair(@RequestBody EnglishWord englishWord, RussianWord russianWord){
+    public ResponseEntity addWordPair(@RequestBody WordPair wordPair){
+        EnglishWord englishWord = new EnglishWord();
+        englishWord.setEnWordBody(wordPair.getEnWord());
+        RussianWord russianWord = new RussianWord();
+        russianWord.setRuWordBody(wordPair.getRuWord());
         russianWordRepo.save(russianWord);
         englishWordRepo.save(englishWord);
-        return new ResponseEntity("Успех", HttpStatus.CREATED);
+        return new ResponseEntity(englishWord.getEnWordBody() + " " + russianWord.getRuWordBody(), HttpStatus.CREATED);
     }
 
 //    @RequestMapping(value = "/word/{word}", method = RequestMethod.GET)
