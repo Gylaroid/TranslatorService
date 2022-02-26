@@ -13,10 +13,11 @@ import javax.persistence.Table;
 public class RussianWord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "ru_word")
-    private String ruWordBody;
+    private String wordBody;
 
     @OneToOne(mappedBy = "ruWord")
     private EnglishWord enWord;
@@ -32,12 +33,12 @@ public class RussianWord {
         this.id = id;
     }
 
-    public String getRuWordBody() {
-        return ruWordBody;
+    public String getWordBody() {
+        return wordBody;
     }
 
-    public void setRuWordBody(String ruWord) {
-        this.ruWordBody = ruWord;
+    public void setWordBody(String ruWord) {
+        this.wordBody = ruWord;
     }
 
     public EnglishWord getEnWord() {
@@ -52,7 +53,7 @@ public class RussianWord {
     public String toString() {
         return "RussianWord{" +
                 "id=" + id +
-                ", ruWord='" + ruWordBody + '\'' +
+                ", ruWord='" + wordBody + '\'' +
                 ", enWord=" + enWord +
                 '}';
     }
